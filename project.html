@@ -1,0 +1,1040 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KVR Vehicle Booking System</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f8;
+  color: #222;
+}
+
+/* HEADER */
+header {
+  background: #111827;
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fbbf24;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #fbbf24;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #1f2937, #374151);
+  color: white;
+  padding: 60px 6%;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: #fbbf24;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  background: #fbbf24;
+  color: #111827;
+  border: none;
+  padding: 13px 25px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #f59e0b;
+}
+
+/* VEHICLE SECTION */
+section {
+  padding: 55px 6%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* VEHICLE GRID */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.vehicle-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,.12);
+  transition: .3s;
+  border: 3px solid transparent;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-8px);
+  border-color: #fbbf24;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+}
+
+.vehicle-image {
+  height: 180px;
+  border-radius: 12px;
+  background: #fbbf24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  margin-bottom: 15px;
+}
+
+.vehicle-card:nth-child(2) .vehicle-image {
+  background: #d1d5db;
+}
+
+.vehicle-card:nth-child(3) .vehicle-image {
+  background: #22c55e;
+}
+
+.vehicle-card:nth-child(4) .vehicle-image {
+  background: #86efac;
+}
+
+.vehicle-card h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.vehicle-card p {
+  color: #666;
+}
+
+/* BOOKING FORM */
+.register-area {
+  background: #e5e7eb;
+}
+
+.form-container {
+  max-width: 950px;
+  margin: auto;
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+
+.selected-vehicle {
+  background: #111827;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.selected-vehicle span {
+  color: #fbbf24;
+  font-weight: bold;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+input,
+select,
+textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #fbbf24;
+}
+
+.submit-area {
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* DASHBOARD */
+.dashboard {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.search-box {
+  margin-bottom: 25px;
+}
+
+.search-box input {
+  width: 100%;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #111827;
+  color: white;
+}
+
+.status {
+  background: #dcfce7;
+  color: #166534;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* FOOTER */
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+/* MOBILE */
+@media(max-width:900px) {
+  .vehicle-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:600px) {
+
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav a {
+    margin: 0 7px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">KVR</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#vehicles">Vehicles</a>
+<a href="#register">Register</a>
+<a href="#dashboard">Dashboard</a>
+</nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<h1>
+KVR <span>Vehicle</span> Booking
+</h1>
+
+<p>
+Select your vehicle and enter driver, customer, date and timing details.
+</p>
+
+<a href="#vehicles" class="btn">
+Select Vehicle
+</a>
+
+</section>
+
+
+<!-- VEHICLES -->
+
+<section id="vehicles">
+
+<div class="section-title">
+
+<h2>Select Your Vehicle</h2>
+
+<p>
+Click on the vehicle image to register or book it.
+</p>
+
+</div>
+
+
+<div class="vehicle-grid">
+
+
+<!-- OLD JCB -->
+
+<div class="vehicle-card"
+onclick="selectVehicle('JCB Old')">
+
+<div class="vehicle-image">
+🚜
+</div>
+
+<h3>JCB Old</h3>
+
+<p>Old JCB Machine</p>
+
+</div>
+
+
+<!-- NEW JCB -->
+
+<div class="vehicle-card"
+onclick="selectVehicle('JCB New')">
+
+<div class="vehicle-image">
+🚜
+</div>
+
+<h3>JCB New</h3>
+
+<p>New JCB Machine</p>
+
+</div>
+
+
+<!-- KUTTA TRACTOR -->
+
+<div class="vehicle-card"
+onclick="selectVehicle('Kutta Tractor')">
+
+<div class="vehicle-image">
+🚜
+</div>
+
+<h3>Kutta</h3>
+
+<p>Kutta Tractor</p>
+
+</div>
+
+
+<!-- KVR TRACTOR -->
+
+<div class="vehicle-card"
+onclick="selectVehicle('KVR Tractor')">
+
+<div class="vehicle-image">
+🚜
+</div>
+
+<h3>KVR</h3>
+
+<p>KVR Tractor</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- REGISTRATION -->
+
+<section class="register-area" id="register">
+
+<div class="section-title">
+
+<h2>Vehicle Registration / Booking</h2>
+
+<p>
+Enter the driver and customer information.
+</p>
+
+</div>
+
+
+<div class="form-container">
+
+
+<div class="selected-vehicle">
+
+Selected Vehicle:
+
+<span id="selectedVehicle">
+Please select a vehicle
+</span>
+
+</div>
+
+
+<form id="vehicleForm">
+
+<div class="form-grid">
+
+
+<!-- VEHICLE NAME -->
+
+<div class="form-group">
+
+<label>Vehicle Name</label>
+
+<input
+type="text"
+id="vehicleName"
+placeholder="Select vehicle above"
+readonly
+required>
+
+</div>
+
+
+<!-- DRIVER NAME -->
+
+<div class="form-group">
+
+<label>Driver Name</label>
+
+<input
+type="text"
+id="driverName"
+placeholder="Enter driver name"
+required>
+
+</div>
+
+
+<!-- CUSTOMER NAME -->
+
+<div class="form-group">
+
+<label>Customer Name</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Enter customer name"
+required>
+
+</div>
+
+
+<!-- MOBILE -->
+
+<div class="form-group">
+
+<label>Customer Mobile Number</label>
+
+<input
+type="tel"
+id="mobile"
+placeholder="Enter mobile number"
+required>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="form-group">
+
+<label>Booking Date</label>
+
+<input
+type="date"
+id="bookingDate"
+required>
+
+</div>
+
+
+<!-- TIME -->
+
+<div class="form-group">
+
+<label>Timing</label>
+
+<input
+type="time"
+id="bookingTime"
+required>
+
+</div>
+
+
+<!-- VEHICLE NUMBER -->
+
+<div class="form-group">
+
+<label>Vehicle Number</label>
+
+<input
+type="text"
+id="vehicleNumber"
+placeholder="Enter vehicle number"
+required>
+
+</div>
+
+
+<!-- WORK TYPE -->
+
+<div class="form-group">
+
+<label>Work / Service Type</label>
+
+<select id="workType" required>
+
+<option value="">
+Select Work
+</option>
+
+<option>
+Construction
+</option>
+
+<option>
+Agriculture
+</option>
+
+<option>
+Earth Moving
+</option>
+
+<option>
+Transportation
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+</div>
+
+
+<!-- ADDRESS -->
+
+<div class="form-group full">
+
+<label>Customer Address</label>
+
+<textarea
+id="address"
+rows="4"
+placeholder="Enter customer address">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="submit-area">
+
+<button
+class="btn"
+type="submit">
+
+Register / Book Vehicle
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+<div class="dashboard">
+
+<div class="section-title">
+
+<h2>KVR Booking Dashboard</h2>
+
+<p>
+View all registered vehicle bookings.
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="Search vehicle, driver, customer or vehicle number...">
+
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Vehicle</th>
+<th>Driver</th>
+<th>Customer</th>
+<th>Mobile</th>
+<th>Date</th>
+<th>Time</th>
+<th>Vehicle No.</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="vehicleTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+© 2026 KVR Vehicle Booking System
+</p>
+
+<p>
+JCB • Tractor • Vehicle Management
+</p>
+
+</footer>
+
+
+<script>
+
+/* STORAGE */
+
+let bookings =
+JSON.parse(
+localStorage.getItem("kvrBookings")
+) || [];
+
+
+/* SELECT VEHICLE */
+
+function selectVehicle(vehicleName) {
+
+document.getElementById(
+"vehicleName"
+).value = vehicleName;
+
+document.getElementById(
+"selectedVehicle"
+).textContent = vehicleName;
+
+
+/* GO TO FORM */
+
+document.getElementById(
+"register"
+).scrollIntoView({
+behavior: "smooth"
+});
+
+}
+
+
+/* FORM SUBMIT */
+
+document
+.getElementById("vehicleForm")
+.addEventListener(
+"submit",
+function(event) {
+
+event.preventDefault();
+
+
+const vehicle =
+document.getElementById(
+"vehicleName"
+).value;
+
+
+if(vehicle === "") {
+
+alert(
+"Please select a vehicle first!"
+);
+
+return;
+
+}
+
+
+const booking = {
+
+vehicle:
+vehicle,
+
+driver:
+document.getElementById(
+"driverName"
+).value,
+
+customer:
+document.getElementById(
+"customerName"
+).value,
+
+mobile:
+document.getElementById(
+"mobile"
+).value,
+
+date:
+document.getElementById(
+"bookingDate"
+).value,
+
+time:
+document.getElementById(
+"bookingTime"
+).value,
+
+number:
+document.getElementById(
+"vehicleNumber"
+).value.toUpperCase(),
+
+work:
+document.getElementById(
+"workType"
+).value,
+
+address:
+document.getElementById(
+"address"
+).value
+
+};
+
+
+/* SAVE */
+
+bookings.push(booking);
+
+localStorage.setItem(
+"kvrBookings",
+JSON.stringify(bookings)
+);
+
+
+alert(
+"Vehicle booking registered successfully!"
+);
+
+
+/* RESET */
+
+this.reset();
+
+document.getElementById(
+"vehicleName"
+).value = "";
+
+document.getElementById(
+"selectedVehicle"
+).textContent =
+"Please select a vehicle";
+
+
+displayBookings();
+
+
+/* DASHBOARD */
+
+document.getElementById(
+"dashboard"
+).scrollIntoView({
+behavior: "smooth"
+});
+
+});
+
+
+/* DISPLAY BOOKINGS */
+
+function displayBookings(
+data = bookings
+) {
+
+const table =
+document.getElementById(
+"vehicleTable"
+);
+
+table.innerHTML = "";
+
+
+if(data.length === 0) {
+
+table.innerHTML = `
+
+<tr>
+
+<td
+colspan="8"
+style="text-align:center;">
+
+No vehicle bookings yet.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+data.forEach(
+booking => {
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td>
+<strong>
+${booking.vehicle}
+</strong>
+</td>
+
+<td>
+${booking.driver}
+</td>
+
+<td>
+${booking.customer}
+</td>
+
+<td>
+${booking.mobile}
+</td>
+
+<td>
+${booking.date}
+</td>
+
+<td>
+${booking.time}
+</td>
+
+<td>
+${booking.number}
+</td>
+
+<td>
+
+<span class="status">
+Booked
+</span>
+
+</td>
+
+`;
+
+
+table.appendChild(row);
+
+});
+
+}
+
+
+/* SEARCH */
+
+document
+.getElementById("search")
+.addEventListener(
+"input",
+function() {
+
+const text =
+this.value.toLowerCase();
+
+
+const filtered =
+bookings.filter(
+booking =>
+
+booking.vehicle
+.toLowerCase()
+.includes(text)
+
+||
+
+booking.driver
+.toLowerCase()
+.includes(text)
+
+||
+
+booking.customer
+.toLowerCase()
+.includes(text)
+
+||
+
+booking.number
+.toLowerCase()
+.includes(text)
+
+);
+
+
+displayBookings(filtered);
+
+});
+
+
+/* DEFAULT DATE */
+
+document.getElementById(
+"bookingDate"
+).valueAsDate =
+new Date();
+
+
+/* LOAD */
+
+displayBookings();
+
+</script>
+
+</body>
+</html>
+```
